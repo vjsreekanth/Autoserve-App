@@ -1,6 +1,7 @@
 class User < ApplicationRecord
     has_secure_password
     before_save :normalize_phone
+    has_many :vehicles
 
 
     # Validations

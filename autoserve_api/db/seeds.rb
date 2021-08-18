@@ -7,6 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 PASSWORD = "123"
+TYPES = ['Motorcycle', 'Car', 'Truck']
+
+Vehicle.delete_all()
 User.delete_all()
 
 super_user = User.create(
@@ -31,6 +34,19 @@ super_user = User.create(
   end
   
   users = User.all
-  
+
+  10.times do |x|
+    Vehicle.create({
+      vehicle_type: TYPES.sample,
+      make: Faker::Vehicle.make,
+      model: Faker::Vehicle.model,
+      trim: Faker::Vehicle.style,
+      year: Faker::Vehicle.year,
+      vin: Faker::Vehicle.vin,
+      user: users.sample,
+      })
+    end
+    vehicles = Vehicle.all
+  puts Cowsay.say("Generated #{vehicles.count}  vehicles!", :turtle)
   puts Cowsay.say("Generated #{User.count} users", :ghostbusters)
   puts Cowsay.say("Sign in with #{super_user.email} and password: #{PASSWORD}", :cow)
