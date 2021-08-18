@@ -8,7 +8,7 @@
 
 PASSWORD = "123"
 TYPES = ['Motorcycle', 'Car', 'Truck']
-
+ServiceRequest.delete_all()
 Vehicle.delete_all()
 User.delete_all()
 
@@ -47,6 +47,25 @@ super_user = User.create(
       })
     end
     vehicles = Vehicle.all
+
+      10.times do |x|
+      ServiceRequest.create({
+        title: Faker::Marketing.buzzwords,
+        description: Faker::Hacker.say_something_smart,
+        start_date: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 7, format: :default),
+        vehicle_type: TYPES.sample,
+        make: Faker::Vehicle.make,
+        model: Faker::Vehicle.model,
+        trim: Faker::Vehicle.style,
+        year: Faker::Vehicle.year,
+        vin: Faker::Vehicle.vin,
+        user: users.sample,
+        })
+
+      end
+     service_requests = ServiceRequest.all
+
   puts Cowsay.say("Generated #{vehicles.count}  vehicles!", :turtle)
   puts Cowsay.say("Generated #{User.count} users", :ghostbusters)
+  puts Cowsay.say("Generated #{ServiceRequest.count}  service-requests!", :bunny)
   puts Cowsay.say("Sign in with #{super_user.email} and password: #{PASSWORD}", :cow)

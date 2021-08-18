@@ -18,6 +18,10 @@ class Ability
       can :crud, Vehicle do |vehicle|
         vehicle.user == user
       end
+
+      can :crud, ServiceRequest do |service_request|
+        vehicle.user == user
+      end
     
     # The first argument to `can` is the action you are giving the user
     # permission to do.
