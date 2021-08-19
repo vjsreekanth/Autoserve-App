@@ -8,6 +8,8 @@
 
 PASSWORD = "123"
 TYPES = ['Motorcycle', 'Car', 'Truck']
+
+ServiceOffer.delete_all()
 ServiceRequest.delete_all()
 Vehicle.delete_all()
 User.delete_all()
@@ -52,7 +54,7 @@ super_user = User.create(
       ServiceRequest.create({
         title: Faker::Marketing.buzzwords,
         description: Faker::Hacker.say_something_smart,
-        start_date: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 7, format: :default),
+        start_date: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 6, format: :default),
         vehicle_type: TYPES.sample,
         make: Faker::Vehicle.make,
         model: Faker::Vehicle.model,
@@ -65,7 +67,22 @@ super_user = User.create(
       end
      service_requests = ServiceRequest.all
 
+     10.times do |x|
+      ServiceOffer.create({
+        comment: Faker::Marketing.buzzwords,
+        estimate_price: Faker::Number.decimal(l_digits: 3, r_digits: 3),
+        start_date: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 6, format: :default),
+        delivery_date: Faker::Time.between(from: DateTime.now + 7, to: DateTime.now + 14, format: :default),
+        status: "pending",
+        user: users.sample,
+        service_request: service_requests.sample
+        })
+
+      end
+     service_offers= ServiceOffer.all
+
   puts Cowsay.say("Generated #{vehicles.count}  vehicles!", :turtle)
   puts Cowsay.say("Generated #{User.count} users", :ghostbusters)
   puts Cowsay.say("Generated #{ServiceRequest.count}  service-requests!", :bunny)
+  puts Cowsay.say("Generated #{ServiceOffer.count}  service_offers!", :kitty)
   puts Cowsay.say("Sign in with #{super_user.email} and password: #{PASSWORD}", :cow)

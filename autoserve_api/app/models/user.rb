@@ -3,6 +3,7 @@ class User < ApplicationRecord
     before_save :normalize_phone
     has_many :vehicles
     has_many :service_requests
+    has_many :service_offers
 
 
     # Validations

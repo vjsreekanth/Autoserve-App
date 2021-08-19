@@ -20,9 +20,12 @@ class Ability
       end
 
       can :crud, ServiceRequest do |service_request|
-        vehicle.user == user
+        service_request.user == user
       end
-    
+
+      can :crud, ServiceOffer do |service_offer|
+        service_offfer.user == user
+      end
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions

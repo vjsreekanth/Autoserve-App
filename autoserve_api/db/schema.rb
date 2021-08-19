@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_18_114739) do
+ActiveRecord::Schema.define(version: 2021_08_18_224109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "service_offers", force: :cascade do |t|
+    t.text "comment"
+    t.datetime "start_date"
+    t.datetime "delivery_date"
+    t.float "estimate_price"
+    t.string "status", default: "pending"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.bigint "service_request_id", null: false
+    t.index ["service_request_id"], name: "index_service_offers_on_service_request_id"
+    t.index ["user_id"], name: "index_service_offers_on_user_id"
+  end
 
   create_table "service_requests", force: :cascade do |t|
     t.string "title"
@@ -57,6 +71,8 @@ ActiveRecord::Schema.define(version: 2021_08_18_114739) do
     t.index ["user_id"], name: "index_vehicles_on_user_id"
   end
 
+  add_foreign_key "service_offers", "service_requests"
+  add_foreign_key "service_offers", "users"
   add_foreign_key "service_requests", "users"
   add_foreign_key "vehicles", "users"
 end
