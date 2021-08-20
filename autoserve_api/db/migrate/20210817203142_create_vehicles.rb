@@ -7,7 +7,7 @@ class CreateVehicles < ActiveRecord::Migration[6.1]
       t.string :trim
       t.string :year
       t.string :vin
-
+      t.references :customer, null: false, index: true, foreign_key: {to_table: :users}
       t.timestamps
     end
   end

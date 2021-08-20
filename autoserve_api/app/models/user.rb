@@ -1,9 +1,12 @@
 class User < ApplicationRecord
     has_secure_password
     before_save :normalize_phone
-    has_many :vehicles
-    has_many :service_requests
-    has_many :service_offers
+    has_many :vehicles, :foreign_key => "customer_id"
+    has_many :service_requests, :foreign_key => "customer_id"
+    has_many :service_offers, :foreign_key => "mechanic_id" 
+    has_many :appointments_for, :class_name => "Appointments", :foreign_key => "customer_id"
+    has_many :appointments_by, :class_name => "Appointments", :foreign_key => "mechanic_id"
+
 
 
     # Validations

@@ -1,6 +1,8 @@
 class ServiceOffer < ApplicationRecord
-    belongs_to :user
+    belongs_to :mechanic, :class_name => "User"
     belongs_to :service_request
+    has_one :appointment
+    
 
     # validations
     validates :estimate_price, presence: true

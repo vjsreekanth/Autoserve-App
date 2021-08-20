@@ -8,7 +8,7 @@ class Api::V1::VehiclesController < Api::ApplicationController
       @user = User.find params[:user_id]
       vehicles = @user.vehicles
     else
-      vehicles = vehicle.order(created_at: :desc)
+      vehicles = Vehicle.order(created_at: :desc)
     end
     render(json: vehicles, each_serializer: VehicleSerializer)
   end
@@ -19,7 +19,7 @@ class Api::V1::VehiclesController < Api::ApplicationController
 
   def create
     vehicle = Vehicle.new vehicle_params
-    vehicle.user = current_user
+    vehicle.customer = current_user
     if vehicle.save
       render json: { id: vehicle.id }
     else

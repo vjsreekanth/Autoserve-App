@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do #👈🏻 we can set default response format of the block
     namespace :v1 do
-      resources :vehicles, only: [:create, :destroy, :update, :show, :index]
+      
       resources :service_requests, only: [:create, :destroy, :update, :show, :index] do
         resources :service_offers, shallow: :true, only: [:create, :destroy, :update, :show, :index]
       end
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
         resources :service_requests, only: [:index]
         resources :service_offers, only: [:index]
 
-        resources :vehicles, only: [:index]
+        resources :vehicles, only: [:create, :destroy, :update, :show, :index]
         get :current, on: :collection
 
       end

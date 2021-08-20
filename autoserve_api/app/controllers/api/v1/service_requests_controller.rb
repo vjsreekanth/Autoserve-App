@@ -18,7 +18,7 @@ class Api::V1::ServiceRequestsController < Api::ApplicationController
     
       def create
         service_request = ServiceRequest.new service_request_params
-        service_request.user = current_user
+        service_request.custome = current_user
         if service_request.save
           render json: { id: service_request.id }
         else
@@ -52,7 +52,7 @@ class Api::V1::ServiceRequestsController < Api::ApplicationController
       end
     
       def service_request_params
-        params.require(:service_request).permit(:title, :description, :start_date, :vehicle_type, :make, :model, :trim, :year, :vin, :status)
+        params.require(:service_request).permit(:title, :description, :appointment_date, :status)
       end
     
       def authorize!

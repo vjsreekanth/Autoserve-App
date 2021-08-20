@@ -32,7 +32,7 @@ class Api::V1::ServiceOffersController < Api::ApplicationController
       end
     
       def update
-        if @service_offfer.update service_offer_params
+        if @service_offer.update service_offer_params
           render json: { id: @service_offer.id }
         else
           render(

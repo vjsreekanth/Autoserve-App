@@ -10,40 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_18_224109) do
+ActiveRecord::Schema.define(version: 2021_08_19_182329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appointments", force: :cascade do |t|
+    t.string "status", default: "pending"
+    t.datetime "start_time", null: false
+    t.bigint "customer_id", null: false
+    t.bigint "mechanic_id", null: false
+    t.bigint "service_offer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_appointments_on_customer_id"
+    t.index ["mechanic_id"], name: "index_appointments_on_mechanic_id"
+    t.index ["service_offer_id"], name: "index_appointments_on_service_offer_id"
+  end
 
   create_table "service_offers", force: :cascade do |t|
     t.text "comment"
     t.datetime "start_date"
     t.datetime "delivery_date"
     t.float "estimate_price"
-    t.string "status", default: "pending"
+    t.string "status", default: "active"
+    t.bigint "mechanic_id", null: false
+    t.bigint "service_request_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
-    t.bigint "service_request_id", null: false
+    t.index ["mechanic_id"], name: "index_service_offers_on_mechanic_id"
     t.index ["service_request_id"], name: "index_service_offers_on_service_request_id"
-    t.index ["user_id"], name: "index_service_offers_on_user_id"
   end
 
   create_table "service_requests", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.datetime "start_date"
-    t.string "vehicle_type"
-    t.string "make"
-    t.string "model"
-    t.string "trim"
-    t.string "year"
-    t.string "vin"
+    t.datetime "appointment_date"
     t.string "status", default: "pending"
+    t.bigint "customer_id", null: false
+    t.bigint "vehicle_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_service_requests_on_user_id"
+    t.index ["customer_id"], name: "index_service_requests_on_customer_id"
+    t.index ["vehicle_id"], name: "index_service_requests_on_vehicle_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -65,14 +74,18 @@ ActiveRecord::Schema.define(version: 2021_08_18_224109) do
     t.string "trim"
     t.string "year"
     t.string "vin"
+    t.bigint "customer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_vehicles_on_user_id"
+    t.index ["customer_id"], name: "index_vehicles_on_customer_id"
   end
 
+  add_foreign_key "appointments", "service_offers"
+  add_foreign_key "appointments", "users", column: "customer_id"
+  add_foreign_key "appointments", "users", column: "mechanic_id"
   add_foreign_key "service_offers", "service_requests"
-  add_foreign_key "service_offers", "users"
-  add_foreign_key "service_requests", "users"
-  add_foreign_key "vehicles", "users"
+  add_foreign_key "service_offers", "users", column: "mechanic_id"
+  add_foreign_key "service_requests", "users", column: "customer_id"
+  add_foreign_key "service_requests", "vehicles"
+  add_foreign_key "vehicles", "users", column: "customer_id"
 end
