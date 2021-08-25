@@ -18,7 +18,7 @@ class Api::V1::ServiceRequestsController < Api::ApplicationController
     
       def create
         service_request = ServiceRequest.new service_request_params
-        service_request.custome = current_user
+        service_request.customer = current_user
         if service_request.save
           render json: { id: service_request.id }
         else

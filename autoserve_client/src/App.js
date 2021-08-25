@@ -9,8 +9,10 @@ import AuthRoute from './components/AuthRoute';
 import AdminPage from './components/AdminPage';
 import CustomerPage from './components/CustomerPage';
 import MechanicPage from './components/MechanicPage';
+import { VehicleIndexPage } from './components/VehicleIndexPage';
 
 import './App.css';
+import AddVehiclePage from './components/AddVehiclePage';
 
 const App = () => {
   const [state, setState] = useState({user: null})
@@ -50,6 +52,12 @@ const App = () => {
       <AuthRoute exact path="/admin" 
         isAuthenticated={state.user}
         component={AdminPage}/>
+        <AuthRoute exact path="/vehicles" 
+        isAuthenticated={state.user}
+        component={VehicleIndexPage}/>
+        <AuthRoute exact path="/add_vehicles" 
+        isAuthenticated={state.user}
+        component={AddVehiclePage}/>
      
       <Route exact path='/SignInPage' render={(routeProps)=><SignInPage {...routeProps} onSignIn={getCurrentUser}/>} />
       <Route exact path='/SignUpPage' render={(routeProps)=><SignUpPage {...routeProps} onSignUp={getCurrentUser}/>} />

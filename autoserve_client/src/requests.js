@@ -39,4 +39,27 @@ export const User = {
   }
 }
 
+export const Vehicle = {
+  index(id, params) {
+    return fetch(`${BASE_URL}/users/${id}/vehicles`, {
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    }).then((res) => {
+      return res.json();
+    });
+  },
+  create(id, params) {
+    return fetch(`${BASE_URL}/users/${id}/vehicles`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params),
+    })
+      .then((res) => res.json())
+    
+  }
 
+}

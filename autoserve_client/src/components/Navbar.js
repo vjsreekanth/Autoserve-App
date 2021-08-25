@@ -10,9 +10,14 @@ const Navbar = (props) => {
 
 
 
-  return  <nav style={{padding: "10px",display: "flex", }}>
-     <NavLink style={{ marginRight: "20px" }}  to="/">Home</NavLink>
-    {currentUser ? <NavLink  style={{ marginRight: "20px" }}  to="/customers">Customer Page </NavLink> : ''}
+  return  <nav className="justify-content-end" activeKey="/home" style={{padding: "10px",display: "flex", }}>
+     <NavLink  style={{ marginRight: "20px" }}  to="/">Home</NavLink>
+    {currentUser ? <>
+    <NavLink  style={{ marginRight: "20px" }}  to="/customers">Customer Page </NavLink> 
+    <NavLink  style={{ marginRight: "20px" }}  to="/vehicles">Vehicles</NavLink>
+    <NavLink  style={{ marginRight: "20px" }}  to="/add_vehicles">Add Vehicles</NavLink>
+    </> 
+    : ''}
 
     {currentUser && currentUser.is_mechanic ? 
     <NavLink style={{ marginRight: "20px" }}  to="/mechanics">Mechanic Page</NavLink> : ''}
