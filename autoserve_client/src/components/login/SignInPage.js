@@ -17,8 +17,17 @@ const SignInPage = (props) => {
     Session.create(params).then(data => {
       console.log(data)
       if (data.id) {
-        onSignIn()
-        props.history.push('/customers')
+        onSignIn().then(user=>{
+          if(user.is_admin){
+            props.history.push('/admin')
+
+          }else if(user.is_mechanic){
+            props.history.push('/mechanics')
+          }else{
+            props.history.push('/customers')
+          }
+       })
+       
       }
     })
   }

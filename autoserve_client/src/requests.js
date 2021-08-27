@@ -63,3 +63,47 @@ export const Vehicle = {
   }
 
 }
+
+export const ServiceRequest = {
+  index(){
+    return fetch(`${BASE_URL}/service_requests`,{
+      credentials: 'include'
+
+    })
+
+    .then(res => {
+        console.log(res);
+        return res.json();
+    })
+},
+create(id, params) {
+  return fetch(`${BASE_URL}/vehicles/${id}/service_requests`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(params),
+  })
+    .then((res) => res.json())
+  
+}
+
+  
+}
+
+export const ServiceOffer = {
+  create(id, params){
+    console.log(params, id)
+    return fetch(`${BASE_URL}/service_requests/${id}/service_offers`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params),
+    })
+      .then((res) => res.json())
+    
+  }
+}

@@ -19,7 +19,7 @@ class Api::V1::ServiceOffersController < Api::ApplicationController
       def create
         @service_request= ServiceRequest.find params[:service_request_id]
         service_offer = ServiceOffer.new service_offer_params
-        service_offer.user = current_user
+        service_offer.mechanic = current_user
         service_offer.service_request = @service_request
         if service_offer.save
           render json: { id: service_offer.id }

@@ -16,6 +16,8 @@ const Navbar = (props) => {
     <NavLink  style={{ marginRight: "20px" }}  to="/customers">Customer Page </NavLink> 
     <NavLink  style={{ marginRight: "20px" }}  to="/vehicles">Vehicles</NavLink>
     <NavLink  style={{ marginRight: "20px" }}  to="/add_vehicles">Add Vehicles</NavLink>
+    <NavLink  style={{ marginRight: "20px" }}  to="/service_requests">Service Requests</NavLink>
+    <NavLink  style={{ marginRight: "20px" }}  to="/new_service_request">New Service Request</NavLink>
     </> 
     : ''}
 

@@ -2,13 +2,9 @@ class Api::V1::ServiceRequestsController < Api::ApplicationController
     before_action :find_service_request, only: [:destroy, :update, :show]
     before_action :authenticate_user!, only: [:create, :update, :destroy, :index]
     
-    def index
-        if params[:user_id]
-          @user = User.find params[:user_id]
-          service_requests = @user.service_requests
-        else
+      def index
           service_requests = ServiceRequest.order(created_at: :desc)
-        end
+   
         render(json: service_requests, each_serializer: ServiceRequestSerializer)
       end
     
@@ -17,8 +13,10 @@ class Api::V1::ServiceRequestsController < Api::ApplicationController
       end
     
       def create
+        @vehicle = Vehicle.find params[:vehicle_id]
         service_request = ServiceRequest.new service_request_params
         service_request.customer = current_user
+        service_request.vehicle = @vehicle
         if service_request.save
           render json: { id: service_request.id }
         else
