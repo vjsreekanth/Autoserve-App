@@ -1,22 +1,25 @@
 class Api::V1::AppointmentController < Api::ApplicationController
     before_action :find_appointment, only: [:show, :destroy, :update]
-    before_action :authenticate_user!, except: [:index, :show]
+    before_action :authenticate_user!, except: [:show]
 
-      def index
-        if params[:user_id]
-          @user = User.find params[:user_id]
-          appointments = @user.appointments
-        else
-          appointments = appointment.order(created_at: :desc)
-        end
-        render(json: appointments, each_serializer: AppointmentSerializer)
+  
+    def index
+      if current_user.is_mechanic
+      appointments = Appointment.where(mechanic_id: current_user.id).order(created_at: :desc)
+      else
+        appointments = Appointment.where(customer_id: current_user.id).order(created_at: :desc)
       end
+
+    render(json: appointments, each_serializer: AppointmentSerializer)
+  end
 
       def create
         @service_offer = ServiceOffer.find params[:service_offer_id]
+        
         appointment = Appointment.new appointment_params 
         appointment.service_offer = @service_offer
-        appointment.user = current_user
+        appointment.mechanic = @service_offer.mechanic
+        appointment.customer = current_user
         if appointment.save
             render json: { id: appointment.id }
         else

@@ -36,12 +36,14 @@ export const User = {
       },
       body: JSON.stringify({ user: params })
     }).then(res => res.json())
-  }
+  },
+  
 }
 
 export const Vehicle = {
-  index(id, params) {
-    return fetch(`${BASE_URL}/users/${id}/vehicles`, {
+  index() {
+    return fetch(`${BASE_URL}/vehicles`, {
+      credentials: "include",
       headers: {
         "Cache-Control": "no-cache",
       },
@@ -105,5 +107,76 @@ export const ServiceOffer = {
     })
       .then((res) => res.json())
     
-  }
+  },
+// for mechanic page
+  index() {
+    return fetch(`${BASE_URL}/service_offers`, {
+      credentials: "include",
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    }).then((res) => {
+      return res.json();
+    });
+  },
+  // for vehicle owner page
+  
 }
+
+export const CustomerDashboard = {
+  index(){
+    return fetch(`${BASE_URL}/customers`, {
+      credentials: "include",
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    }).then((res) => {
+      console.log(res)
+      return res.json();
+    });
+  },
+  }
+
+export const Appointment = {
+  create(id, params){
+    console.log(params, id)
+    return fetch(`${BASE_URL}/service_offers/${id}/appointment`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params),
+    })
+      .then((res) => res.json())
+    
+  },
+
+  index(){
+    return fetch(`${BASE_URL}/appointment`,{
+      credentials: 'include'
+
+    })
+
+    .then(res => {
+        console.log(res);
+        return res.json();
+    })
+},
+
+}
+
+
+export const IndexByMechanic = {
+  index(){
+
+  return fetch(`${BASE_URL}/indexByMechanic`, {
+    credentials: "include",
+    headers: {
+      "Cache-Control": "no-cache",
+    },
+  }).then((res) => {
+    console.log(res)
+    return res.json();
+  });
+},}

@@ -3,8 +3,8 @@ import {Vehicle} from '../requests';
 // import {Link} from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
 // import Button from 'react-bootstrap/Button'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+
+import { ListGroup } from 'react-bootstrap';
 
 
 export const VehicleIndexPage = (props) => {
@@ -13,7 +13,7 @@ export const VehicleIndexPage = (props) => {
     });
      
     useEffect(() => {
-        Vehicle.index(props.currentUser.id).then(vehicles => {
+        Vehicle.index().then(vehicles => {
           setVehicleIndex({ vehicles });
         });
     }, []);
@@ -21,22 +21,22 @@ export const VehicleIndexPage = (props) => {
     return(
         <main>
             <h1>My Vehicles</h1>
-            <Row xs={1} md={2} className="g-4">
+            <ListGroup>
                 {vehicleIndex.vehicles.map((vehicle,index) => (
 
-            <Col className='mt-5 px-md-5'lg={4} md={6} xs={12}>
-                <Card style={{ width: "auto"}} key={index}>
-                    <Card.Body>
-                        <Card.Title>{vehicle.title}</Card.Title>
-                        <Card.Text>
-                            {vehicle.vin}
-                        </Card.Text><br />
-                    </Card.Body>
-                </Card>
+                <ListGroup.Item>
+                    <Card style={{ width: "auto"}} key={index}>
+                        <Card.Body>
+                            <Card.Title>{vehicle.title}</Card.Title>
+                            <Card.Text>
+                                {vehicle.vin}
+                            </Card.Text><br />
+                        </Card.Body>
+                    </Card>
                     
-            </Col>
+            </ListGroup.Item>
                 ))}
-            </Row>
+            </ListGroup>
           
         </main>
     )

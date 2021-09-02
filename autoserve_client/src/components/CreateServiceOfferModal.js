@@ -1,7 +1,7 @@
 import { Modal, Button } from "react-bootstrap"
 import {ServiceOffer} from '../requests'
 import React, {useState} from "react"
-const CreateServiceOfferModal = ({show, handleClose, service_requestId}) =>{
+const CreateServiceOfferModal = ({show, handleClose, service_requestId, setRerender}) =>{
 
    const [params, setParams] = useState({comment:"Hi"})
    const handleFormChange = (event) =>{
@@ -11,7 +11,9 @@ const CreateServiceOfferModal = ({show, handleClose, service_requestId}) =>{
     
     const createServiceOffer = (event)=>{
         event.preventDefault()
-        ServiceOffer.create(service_requestId, params).then(handleClose())
+        ServiceOffer.create(service_requestId, params).then(() => {setRerender(); handleClose()})
+        
+       
     }
 
 

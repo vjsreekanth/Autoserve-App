@@ -1,15 +1,12 @@
 class Api::V1::VehiclesController < Api::ApplicationController
     before_action :find_vehicle, only: [:show, :destroy, :update]
-    before_action :authenticate_user!, except: [:index, :show]
+    before_action :authenticate_user!, except: [:show]
     before_action :authorize!, only: [:update, :destroy]
   
   def index
-    if params[:user_id]
-      @user = User.find params[:user_id]
-      vehicles = @user.vehicles
-    else
-      vehicles = Vehicle.order(created_at: :desc)
-    end
+    vehicles = Vehicle.where(customer_id: current_user.id).order(created_at: :desc)
+
+   
     render(json: vehicles, each_serializer: VehicleSerializer)
   end
 

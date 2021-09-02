@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import { ServiceRequest, Vehicle } from '../requests'
 
-const NewServiceRequestPage = (props) => {
+const NewServiceRequestPage = ({setRerender, currentUser, history}) => {
   const [state, setState] = useState([])
   useEffect(() => {
-    Vehicle.index(props.currentUser.id).then(vehicles => {
+    Vehicle.index().then(vehicles => {
       setState(vehicles)
     })
   }, [])
@@ -22,18 +22,20 @@ const NewServiceRequestPage = (props) => {
       
     }
     // const ownerId = props.currentUser.id
-    console.log(props.currentUser.vehicles)
+    console.log(currentUser.vehicles)
     const vehicleId = formData.get('Vehicle')
     
     ServiceRequest.create(vehicleId, params).then(res => {
       if (res?.id) {
-        props.history.push('/service_requests')
+        
+        history.push('/service_requests')
       } else {
         console.log(res)
       } 
+      
     })
+    
   }
-
     return <main>
       <h2>Create Service Request</h2>
        <div className="container">

@@ -3,8 +3,11 @@ class Api::V1::ServiceRequestsController < Api::ApplicationController
     before_action :authenticate_user!, only: [:create, :update, :destroy, :index]
     
       def index
+        if current_user.is_mechanic
           service_requests = ServiceRequest.order(created_at: :desc)
-   
+        else 
+          service_requests = ServiceRequest.where(customer_id: current_user.id).order(created_at: :desc)
+        end
         render(json: service_requests, each_serializer: ServiceRequestSerializer)
       end
     

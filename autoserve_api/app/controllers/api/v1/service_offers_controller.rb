@@ -3,14 +3,16 @@ class Api::V1::ServiceOffersController < Api::ApplicationController
     before_action :authenticate_user!, only: [:create, :update, :destroy, :index]
 
     def index
-        if params[:user_id]
-          @user = User.find params[:user_id]
-          service_offers= @user.service_offers
-        else
-          service_offers = ServiceOffer.order(created_at: :desc)
-        end
-        render(json: service_offers, each_serializer: ServiceOfferSerializer)
+      if current_user.is_mechanic
+      service_offers= ServiceOffer.where(mechanic_id: current_user.id).order(created_at: :desc)
+      else
+        service_offers= ServiceOffer.where(customer_id: current_user.id).order(created_at: :desc)
       end
+
+    render(json: service_offers, each_serializer: ServiceOfferSerializer)
+  end
+
+  
     
       def show
         render json: @service_offer
@@ -18,9 +20,11 @@ class Api::V1::ServiceOffersController < Api::ApplicationController
     
       def create
         @service_request= ServiceRequest.find params[:service_request_id]
+        @customer = @service_request.customer
         service_offer = ServiceOffer.new service_offer_params
         service_offer.mechanic = current_user
         service_offer.service_request = @service_request
+        service_offer.customer = @customer
         if service_offer.save
           render json: { id: service_offer.id }
         else

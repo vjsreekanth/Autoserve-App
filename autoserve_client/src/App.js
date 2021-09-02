@@ -6,15 +6,18 @@ import SignUpPage from "./components/login/SignUpPage";
 import SignInPage from "./components/login/SignInPage";
 import { User, Session } from './requests';
 import AuthRoute from './components/AuthRoute';
-import AdminPage from './components/AdminPage';
-import CustomerPage from './components/CustomerPage';
-import MechanicPage from './components/MechanicPage';
 import { VehicleIndexPage } from './components/VehicleIndexPage';
 import { ServiceRequestIndexPage } from './components/ServiceRequestIndexPage';
 import NewServiceRequestPage from './components/NewServiceRequestPage';
+import { ServiceOfferIndexPage } from './components/ServiceOfferIndexPage';
 
 import './App.css';
 import AddVehiclePage from './components/AddVehiclePage';
+import { MechanicDashBoard } from './components/DashBoards/MechanicDashBoard';
+import { AdminDashBoard } from './components/DashBoards/AdminDashBoard';
+import { CustomerDashBoard } from './components/DashBoards/CustomerDashBoard';
+
+
 
 const App = () => {
   const [state, setState] = useState({user: null})
@@ -49,15 +52,17 @@ const App = () => {
   <BrowserRouter>
     <Navbar currentUser={state.user} destroySession={destroySession}/>
     <Switch>
-    <AuthRoute exact path="/customers" 
-        isAuthenticated={state.user}
-        component={CustomerPage}/>
+      {state.user&&<Route exact path="/customers" 
+        render={(routeProps) => {
+          return (<CustomerDashBoard {...routeProps} currentUser={state.user} />)
+        }}></Route>}
+    
       <AuthRoute exact path="/mechanics" 
         isAuthenticated={state.user}
-        component={MechanicPage}/>
+        component={MechanicDashBoard}/>
       <AuthRoute exact path="/admin" 
         isAuthenticated={state.user}
-        component={AdminPage}/>
+        component={AdminDashBoard}/>
         <AuthRoute exact path="/vehicles" 
         isAuthenticated={state.user}
         component={VehicleIndexPage}/>
@@ -70,6 +75,9 @@ const App = () => {
          <AuthRoute exact path="/new_service_request" 
         isAuthenticated={state.user}
         component={NewServiceRequestPage}/>
+          <AuthRoute exact path="/service_offers" 
+        isAuthenticated={state.user}
+        component={ServiceOfferIndexPage}/>
      
       <Route exact path='/SignInPage' render={(routeProps)=><SignInPage {...routeProps} onSignIn={getCurrentUser}/>} />
       <Route exact path='/SignUpPage' render={(routeProps)=><SignUpPage {...routeProps} onSignUp={getCurrentUser}/>} />

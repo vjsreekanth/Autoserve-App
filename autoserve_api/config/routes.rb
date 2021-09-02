@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       
       resources :service_requests, only: [:index] do
-        resources :service_offers, shallow: :true, only: [:create]
+        resources :service_offers, shallow: :true, only: [:create, :index]
       end
    
       
@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
       resources :users, only: [:create] do
         # resources :service_requests, only: [:index]
-        resources :service_offers, only: [:index]
+        # resources :service_offers, only: [:indexByCustomer, :indexByMechanic] 
+
+      
 
         resources :vehicles, only: [:create, :destroy, :update, :show, :index] do
           
@@ -22,11 +24,20 @@ Rails.application.routes.draw do
 
       end
 
-      resources :vehicles, only: [] do
+      # get("/customers", to: "users#customerDashboard")
+      # get("/mechanics", to: "users#mechanicDashboard")
+      # get("/indexByCustomer", to: "users#indexByCustomer")
+      # get("/indexByMechanic", to: "users#indexByMechanic")
+
+      resources :vehicles, only: [:index] do
         resources :service_requests, only: [:index, :create] do
         end
       end
 
+      resources :service_offers, only: [:index] do
+        resources :appointment, shallow: :true, only: [:create, :index]
+      end
+      resources :appointment, only: [:index]
 
 
     end

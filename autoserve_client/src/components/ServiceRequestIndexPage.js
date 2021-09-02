@@ -5,7 +5,7 @@ import { Card, Button } from 'react-bootstrap';
 import CreateServiceOfferModal from './CreateServiceOfferModal'
 
 
-export const ServiceRequestIndexPage = (props) => {
+export const ServiceRequestIndexPage = ({setRerender, currentUser}) => {
     const [serviceRequestIndex, setServiceRequestIndex] = useState({
         serviceRequests: [],
     });
@@ -16,7 +16,7 @@ export const ServiceRequestIndexPage = (props) => {
     const handleClose = ()=>{
         setShowModal(false)
     }
-     console.log(props.currentUser)
+     console.log(currentUser)
     useEffect(() => {
         ServiceRequest.index().then(serviceRequests => {
             setServiceRequestIndex({ serviceRequests });
@@ -36,7 +36,10 @@ export const ServiceRequestIndexPage = (props) => {
                             <Card.Text>
                                 {serviceRequest.description}
                             </Card.Text>
+                            {currentUser.is_mechanic&&
+
                             <Button variant="primary" onClick={()=>{setShowModal(true); setRequestId(serviceRequest.id)}}>Create Service Offer</Button>
+                            }
                         </Card.Body>
                     </Card>
 
@@ -44,7 +47,7 @@ export const ServiceRequestIndexPage = (props) => {
                
                 ))}
             </ListGroup>
-            <CreateServiceOfferModal show={showModal} handleClose={handleClose} service_requestId={requestId}/>
+            <CreateServiceOfferModal show={showModal} handleClose={handleClose} service_requestId={requestId} setRerender={setRerender}/>
 
         </main>
     )

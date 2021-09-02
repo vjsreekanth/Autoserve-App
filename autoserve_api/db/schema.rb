@@ -35,9 +35,11 @@ ActiveRecord::Schema.define(version: 2021_08_19_182329) do
     t.float "estimate_price"
     t.string "status", default: "active"
     t.bigint "mechanic_id", null: false
+    t.bigint "customer_id", null: false
     t.bigint "service_request_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_service_offers_on_customer_id"
     t.index ["mechanic_id"], name: "index_service_offers_on_mechanic_id"
     t.index ["service_request_id"], name: "index_service_offers_on_service_request_id"
   end
@@ -84,6 +86,7 @@ ActiveRecord::Schema.define(version: 2021_08_19_182329) do
   add_foreign_key "appointments", "users", column: "customer_id"
   add_foreign_key "appointments", "users", column: "mechanic_id"
   add_foreign_key "service_offers", "service_requests"
+  add_foreign_key "service_offers", "users", column: "customer_id"
   add_foreign_key "service_offers", "users", column: "mechanic_id"
   add_foreign_key "service_requests", "users", column: "customer_id"
   add_foreign_key "service_requests", "vehicles"

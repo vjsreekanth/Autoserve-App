@@ -1,5 +1,6 @@
 class ServiceOffer < ApplicationRecord
     belongs_to :mechanic, :class_name => "User"
+    belongs_to :customer, :class_name => "User"
     belongs_to :service_request
     has_one :appointment
     
