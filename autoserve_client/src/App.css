@@ -37,8 +37,9 @@
   }
 }
 .list-group{
-  max-height: 300px;
+  max-height: 20rem;
   margin-bottom: 10px;
   overflow:scroll;
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling:touch;
 }
+

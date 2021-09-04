@@ -1,7 +1,7 @@
 import { Modal, Button } from "react-bootstrap"
 import {ServiceOffer} from '../requests'
 import React, {useState} from "react"
-const CreateServiceOfferModal = ({show, handleClose, service_requestId, setRerender}) =>{
+const CreateServiceOfferModal = ({show, handleClose, serviceRequestId}) =>{
 
    const [params, setParams] = useState({comment:"Hi"})
    const handleFormChange = (event) =>{
@@ -11,19 +11,22 @@ const CreateServiceOfferModal = ({show, handleClose, service_requestId, setReren
     
     const createServiceOffer = (event)=>{
         event.preventDefault()
-        ServiceOffer.create(service_requestId, params).then(() => {setRerender(); handleClose()})
-        
-       
+        ServiceOffer.create(serviceRequestId, params).then(
+
+          () => {
+            setTimeout(()=>{handleClose()}, 100)
+            
+          })
     }
 
 
     return(
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Create Service Offer</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <h2>Create Service Offers</h2>
+        
        <div className="container">
         <div className="form-box">
           <div className="header-form">
@@ -33,26 +36,26 @@ const CreateServiceOfferModal = ({show, handleClose, service_requestId, setReren
            <form onSubmit={createServiceOffer}>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span className="input-group-text"></span>
+                <span className="input-group-text mt-2">Comments:</span>
               </div>
               <input onChange={handleFormChange} value={params.comment} type="text" className="form-control" placeholder="comment" name="comment" id="comment"/>
             </div>
             
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span className="input-group-text"></span>
+                <span className="input-group-text mt-2">Start Date:</span>
               </div>
               <input onChange={handleFormChange} value={params.start_date} type="datetime-local" className="form-control" placeholder="start_date" name="start_date" id="start_date" required/>
             </div>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span className="input-group-text"></span>
+                <span className="input-group-text mt-2">Delivery-Date:</span>
               </div>
               <input onChange={handleFormChange} value={params.delivery_date} type="datetime-local" className="form-control" placeholder="delivery_date" name="delivery_date" id="delivery_date" required/>
             </div>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span className="input-group-text"></span>
+                <span className="input-group-text mt-2">Estimate-Price:</span>
               </div>
               <input onChange={handleFormChange} value={params.estimate_price} type="number" step="0.01" className="form-control" placeholder="estimate_price" name="estimate_price" id="estimate_price" required/>
             </div>

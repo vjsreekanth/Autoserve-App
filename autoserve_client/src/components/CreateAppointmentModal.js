@@ -1,8 +1,9 @@
 import { Modal, Button } from "react-bootstrap"
 import {Appointment} from '../requests'
 import React, {useState} from "react"
-const CreateAppointmentModal = ({show, handleClose, serviceOfferId, setRerender, offerStartDate}) =>{
+const CreateAppointmentModal = ({show, handleClose, serviceOfferId, offerStartDate}) =>{
 
+  console.log(offerStartDate)
    const [params, setParams] = useState({})
    const handleFormChange = (event) =>{
        setParams({...params, [event.target.name]:event.target.value})
@@ -11,7 +12,10 @@ const CreateAppointmentModal = ({show, handleClose, serviceOfferId, setRerender,
     
     const createAppointment = (event)=>{
         event.preventDefault()
-        Appointment.create(serviceOfferId, params).then(() => { handleClose()})
+        Appointment.create(serviceOfferId, params).then(() => {handleClose()
+
+        
+        })
     }
 
 
@@ -32,7 +36,7 @@ const CreateAppointmentModal = ({show, handleClose, serviceOfferId, setRerender,
             
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span className="input-group-text"></span>
+                <span className="input-group-text mt-2">Appointment Date:</span>
               </div>
               <input onChange={handleFormChange} value={params.start_time} type="datetime-local" className="form-control" placeholder="start_time" name="start_time" id="start_time" required/>
             </div>

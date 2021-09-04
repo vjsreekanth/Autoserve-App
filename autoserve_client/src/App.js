@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import WelcomePage from './components/Welcomepage';
 import SignUpPage from "./components/login/SignUpPage";
@@ -16,6 +16,7 @@ import AddVehiclePage from './components/AddVehiclePage';
 import { MechanicDashBoard } from './components/DashBoards/MechanicDashBoard';
 import { AdminDashBoard } from './components/DashBoards/AdminDashBoard';
 import { CustomerDashBoard } from './components/DashBoards/CustomerDashBoard';
+import { UserProfilePage } from './components/UserProfilePage';
 
 
 
@@ -38,6 +39,7 @@ const App = () => {
       setState((state) => {
         return { user: null };
       });
+      
     });
   }
 
@@ -78,6 +80,9 @@ const App = () => {
           <AuthRoute exact path="/service_offers" 
         isAuthenticated={state.user}
         component={ServiceOfferIndexPage}/>
+           <AuthRoute exact path="/profile" 
+        isAuthenticated={state.user}
+        component={UserProfilePage}/>
      
       <Route exact path='/SignInPage' render={(routeProps)=><SignInPage {...routeProps} onSignIn={getCurrentUser}/>} />
       <Route exact path='/SignUpPage' render={(routeProps)=><SignUpPage {...routeProps} onSignUp={getCurrentUser}/>} />

@@ -22,14 +22,23 @@ const SignUpPage = (props) => {
     }
     User.create(params).then(res => {
       if (res?.id) {
-        onSignUp()
-        props.history.push('/')
+        onSignUp().then(user=>{
+          if(user.is_admin){
+            props.history.push('/admin')
+
+          }else if(user.is_mechanic){
+            props.history.push('/mechanics')
+          }else{
+            props.history.push('/customers')
+          }
+       })
+       
       }
     })
   }
   return(
     <main style={{ backgroundImage: `url(${sign_up})`, height:'100vh'  }}>
-        <h1>Sign Up</h1>
+        <h1 className="pt-3 text-primary">Sign Up</h1>
        <div className="container">
         <div className="form-box">
           <div className="header-form">
@@ -41,45 +50,43 @@ const SignUpPage = (props) => {
            <form onSubmit={handleSubmit}>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span className="input-group-text"></span>
+                <span className="input-group-text mt-2 me-1">First Name</span>
               </div>
-              <input type="text" className="form-control" placeholder="First Name" name="first_name" id="first_name"/>
+              <input type="text" className="form-control" placeholder="" name="first_name" id="first_name"/>
             </div>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span className="input-group-text"></span>
+                <span className="input-group-text mt-2 me-1">Last Name</span>
               </div>
-              <input type="text" className="form-control" placeholder="Last Name" name="last_name" id="last_name"/>
+              <input type="text" className="form-control" placeholder="" name="last_name" id="last_name"/>
             </div>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span className="input-group-text"></span>
+                <span className="input-group-text mt-2 me-1">E-mail</span>
               </div>
-              <input type="email" className="form-control" placeholder="E-mail" name="email" id="email"/>
+              <input type="email" className="form-control" placeholder="" name="email" id="email"/>
             </div>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span className="input-group-text"></span>
+                <span className="input-group-text mt-2 me-1">Phone Number</span>
               </div>
-              <input type="tel" className="form-control" placeholder="phone number" name="phone" id="phone"/>
+              <input type="tel" className="form-control" placeholder="" name="phone" id="phone"/>
             </div>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span className="input-group-text"></span>
+                <span className="input-group-text mt-2 me-1">Password</span>
               </div>
-              <input type="password" className="form-control" placeholder="Password" name="password" id="password"/>
+              <input type="password" className="form-control" placeholder="" name="password" id="password"/>
             </div>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span className="input-group-text"></span>
+                <span className="input-group-text mt-2 me-1">Confirm Password</span>
               </div>
-              <input type="password" className="form-control" placeholder=" Confirm Password" name="password_confirmation" id="password_confirmation"/>
+              <input type="password" className="form-control" placeholder="" name="password_confirmation" id="password_confirmation"/>
             </div>
-            <div> <div>
-                    <input type="radio" value="Customer" name="Select" defaultChecked/> Customer
-                    <input type="radio" value="Mechanic" name="Select" />Mechanic
-                  </div></div>
-            <button type="submit" className="btn btn-secondary btn-block">Sign Up</button>
+            <span className="me-4 text-info"><input type="radio" value="Customer" name="Select" defaultChecked/> Customer</span>
+            <span className="ms-2 text-info"><input type="radio" value="Mechanic" name="Select" /> Mechanic</span><br />
+            <button type="submit" className="btn btn-info btn-block mt-1">Sign Up</button>
             <div className="message">
             </div> 
             </form>

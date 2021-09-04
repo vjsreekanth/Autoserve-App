@@ -13,23 +13,27 @@ export const MechanicDashBoard = ({currentUser}) => {
     const [trigger, setTrigger] = useState(true)
 
     const setRerender = () => {
-        setTrigger(!trigger)
+        console.log("setRerender function call")
+        setTrigger(true)
     }
 
     
     useEffect(() => {
-        console.log("this is mechanic useeffect")
+        console.log("this is trigger", trigger)
+       
         if(trigger){
+            setTrigger(false)
             ServiceRequest.index().then(service_requests => {
                 setState(state => {
                     return {
-                      ...state,
-                      service_requests
+                        ...state,
+                        service_requests
                     }})
                 })
-
-            ServiceOffer.index().then(service_offers => {
-              setState(state => {
+                
+                ServiceOffer.index().then(service_offers => {
+                    setState(state => {
+                  console.log("this is mechanic useeffect", service_offers)
                 return {
                   ...state,
                   service_offers
@@ -44,7 +48,7 @@ export const MechanicDashBoard = ({currentUser}) => {
                   }})
               })
             }
-        return () => {setTrigger(false)}
+        // return () => {setTrigger(false)}
     }, [trigger])
 
     

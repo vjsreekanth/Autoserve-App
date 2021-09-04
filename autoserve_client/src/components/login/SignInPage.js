@@ -33,7 +33,7 @@ const SignInPage = (props) => {
   }
 
   return <main style={{ backgroundImage: `url(${sign_in})`, height:'100vh'}}>
-    <h1>Sign In</h1>
+    <h1 className="pt-3 text-primary">Sign In</h1>
     <div className="container">
       <div className="form-box">
         <div className="header-form">
@@ -45,17 +45,17 @@ const SignInPage = (props) => {
           <form onSubmit={handleSubmit}>
             <div className="input-group mb-3">
           <div className="input-group-prepend">
-            <span className="input-group-text"><i className="fa fa-user"></i></span>
+            <span className="input-group-text mt-2 me-1">Email<i className="fa fa-user"></i></span>
           </div>
-          <input type="text" className="form-control" placeholder="email" name="email" id="email"/>
+          <input type="text" className="form-control" placeholder="" name="email" id="email"/>
         </div>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
-            <span className="input-group-text"><i className="fa fa-lock"></i></span>
+            <span className="input-group-text mt-2 me-1">Password<i className="fa fa-lock"></i></span>
           </div>
-          <input type="password" className="form-control" placeholder="password" name="password" id="password"/>
+          <input type="password" className="form-control" placeholder="" name="password" id="password"/>
         </div>
-        <button type="submit" className="btn btn-secondary btn-block">LOGIN</button>
+        <button type="submit" className="btn btn-info btn-block">Sign In</button>
         <div className="message">
         </div>
           </form>

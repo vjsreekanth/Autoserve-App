@@ -1,42 +1,45 @@
-import React, {useState, useEffect} from 'react';
-import {Vehicle} from '../requests';
+import React, {useState} from 'react';
 // import {Link} from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
-// import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button'
 
 import { ListGroup } from 'react-bootstrap';
+import CreateVehicleModal from './CreateVehicleModal';
+import VehicleDetails from './VehicleDetails';
 
 
-export const VehicleIndexPage = (props) => {
-    const [vehicleIndex, setVehicleIndex] = useState({
-        vehicles: [],
-    });
-     
-    useEffect(() => {
-        Vehicle.index().then(vehicles => {
-          setVehicleIndex({ vehicles });
-        });
-    }, []);
+
+
+
+
+export const VehicleIndexPage = ({setRerender, vehicles, currentUser}) => {
+    
+    // const [vehicleId, setVehicleId] = useState(null)
+   
+    const [showModal, setShowModal] = useState(false)
+
+    const handleClose = ()=>{
+        setRerender();
+        setShowModal(false)
+    }
+   
+  
   
     return(
         <main>
             <h1>My Vehicles</h1>
+            
+            <Button class="mb-2" variant="primary mb-2" onClick={()=>{setShowModal(true);}}>Add Vehicle</Button>
             <ListGroup>
-                {vehicleIndex.vehicles.map((vehicle,index) => (
+                {vehicles.map((vehicle, id) => (
 
-                <ListGroup.Item>
-                    <Card style={{ width: "auto"}} key={index}>
-                        <Card.Body>
-                            <Card.Title>{vehicle.title}</Card.Title>
-                            <Card.Text>
-                                {vehicle.vin}
-                            </Card.Text><br />
-                        </Card.Body>
-                    </Card>
+                <ListGroup.Item class="mb-3">
+                  <VehicleDetails key={id} vehicle={vehicle} setRerender={setRerender} />
                     
             </ListGroup.Item>
                 ))}
             </ListGroup>
+            <CreateVehicleModal show={showModal} handleClose={handleClose} currentUser={currentUser}/>
           
         </main>
     )

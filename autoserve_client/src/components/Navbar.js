@@ -10,9 +10,11 @@ const Navbar = (props) => {
 
 
 
+
+
   return  <nav className="justify-content-end" activeKey="/home" style={{padding: "10px",display: "flex", }}>
      <NavLink  style={{ marginRight: "20px" }}  to="/">Home</NavLink>
-    {currentUser ? <>
+    {/* {currentUser ? <>
     <NavLink  style={{ marginRight: "20px" }}  to="/customers">Customer Page </NavLink> 
     <NavLink  style={{ marginRight: "20px" }}  to="/vehicles">Vehicles</NavLink>
     <NavLink  style={{ marginRight: "20px" }}  to="/add_vehicles">Add Vehicles</NavLink>
@@ -20,15 +22,16 @@ const Navbar = (props) => {
     <NavLink  style={{ marginRight: "20px" }}  to="/new_service_request">New Service Request</NavLink>
     <NavLink  style={{ marginRight: "20px" }}  to="/service_offers">Service Offers</NavLink>
     </> 
-    : ''}
+    : ''} */}
 
-    {currentUser && currentUser.is_mechanic ? 
+    {/* {currentUser && currentUser.is_mechanic ? 
     <NavLink style={{ marginRight: "20px" }}  to="/mechanics">Mechanic Page</NavLink> : ''}
 
     {currentUser && currentUser.is_admin? 
-    <NavLink style={{ marginRight: "20px" }}  to="/admin">Admin Page</NavLink> : ''}
+    <NavLink style={{ marginRight: "20px" }}  to="/admin">Admin Page</NavLink> : ''} */}
     {currentUser ? 
     <>
+    <NavLink  style={{ marginRight: "20px" }}  to="/profile">My Profile</NavLink>
     <span style={{ marginRight: "20px" }} >Welcome, {currentUser.full_name}</span>
     <Button className="btn-sm" onClick={destroySession}>Sign Out</Button>
     </>
