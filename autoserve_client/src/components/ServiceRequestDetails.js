@@ -15,17 +15,19 @@ const ServiceRequestDetails = (props) => {
         setShowModal(false)
     }
  
-
+    
 
     return(
-        <main>
+        <>
+       
             <Card>
-                <Card.Header as="h5">{serviceRequest.title}</Card.Header>
+                <Card.Header>{serviceRequest.title.toUpperCase()}</Card.Header>
                 <Card.Body>
-                    <Card.Title as="h6">Appointment Date: {new Date(serviceRequest.appointment_date).toLocaleString()}</Card.Title>
-                    <Card.Text>
-                        {serviceRequest.description}
-                    </Card.Text>
+                    <Card.Title >Vehicle Name: {serviceRequest.vehicle} </Card.Title>
+                    <Card.Title>Customer Comments</Card.Title>
+                    <Card.Text  className="mb-2">{serviceRequest.description}</Card.Text>
+                    <Card.Title as="span">Appointment needed on: {new Date(serviceRequest.appointment_date).toLocaleDateString()}</Card.Title>
+                    <Card.Title className="ms-2" as="span">Time: {new Date(serviceRequest.appointment_date).toLocaleTimeString()}</Card.Title>
                         {currentUser.is_mechanic&&
 
                     <Button variant="primary" onClick={()=>{setShowModal(true); setServiceRequestId(serviceRequest.id)}}>Create Service Offer</Button>
@@ -33,7 +35,7 @@ const ServiceRequestDetails = (props) => {
                 </Card.Body>
             </Card>
             <CreateServiceOfferModal show={showModal} handleClose={handleClose} serviceRequestId={serviceRequestId} />    
-        </main>
+       </>
     )
 }
 

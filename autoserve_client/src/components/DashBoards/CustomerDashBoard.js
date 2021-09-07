@@ -94,7 +94,7 @@ export const CustomerDashBoard = ({ currentUser}) => {
                     <Row className="m-2">
                 
                         <Card className="p-3">
-                            <AppointmentIndexPage appointments={state.appointments} setRerender={setRerender} />
+                            <AppointmentIndexPage appointments={state.appointments} setRerender={setRerender} currentUser={currentUser} />
                         </Card>
         
 

@@ -8,7 +8,7 @@ class Vehicle < ApplicationRecord
     validates :year, presence: true
     validates :vin, uniqueness: true
 
-   private
+ 
 
    def title
     "#{make} #{model} #{trim} #{year}".strip

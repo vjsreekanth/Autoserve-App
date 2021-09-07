@@ -123,19 +123,7 @@ export const ServiceOffer = {
   
 }
 
-export const CustomerDashboard = {
-  index(){
-    return fetch(`${BASE_URL}/customers`, {
-      credentials: "include",
-      headers: {
-        "Cache-Control": "no-cache",
-      },
-    }).then((res) => {
-      console.log(res)
-      return res.json();
-    });
-  },
-  }
+
 
 export const Appointment = {
   create(id, params){
@@ -164,19 +152,19 @@ export const Appointment = {
     })
 },
 
+update(id, params) {
+  return fetch(`${BASE_URL}/appointment/${id}`, {
+    method: "PATCH",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(params),
+  })
+    .then((res) => res.json())
+    .catch(console.error);
+}
+
 }
 
 
-export const IndexByMechanic = {
-  index(){
-
-  return fetch(`${BASE_URL}/indexByMechanic`, {
-    credentials: "include",
-    headers: {
-      "Cache-Control": "no-cache",
-    },
-  }).then((res) => {
-    console.log(res)
-    return res.json();
-  });
-},}

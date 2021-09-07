@@ -19,18 +19,20 @@ const ServiceOfferDetails = (props) => {
     console.log(offerStartDate)
 
     return(
-        <main>
+        <main >
             <Card>
-                <Card.Header as="h5"></Card.Header>
+                <Card.Header>Service Request: {serviceOffer.service_title}</Card.Header>
+                
                     <Card.Body>
-                        <Card.Title as="h6">Appointment Date: {new Date(serviceOffer.start_date).toLocaleString()}</Card.Title>
-                        <Card.Title as="h6">Delivery Date: {new Date(serviceOffer.delivery_date).toLocaleString()}</Card.Title>
-                        <Card.Text>
-                            Estimate-Price: {serviceOffer.estimate_price}
-                        </Card.Text>
-                        <Card.Text>
-                            {serviceOffer.comment}
-                        </Card.Text>
+                        <Card.Title>Vehicle: {serviceOffer.service_vehicle}</Card.Title>
+                        <Card.Title as="span">Start Date: {new Date(serviceOffer.start_date).toLocaleDateString()}</Card.Title>
+                        <Card.Title className="ms-2" as="span">Time: {new Date(serviceOffer.start_date).toLocaleTimeString()}</Card.Title><br />
+                        <Card.Title as="span">Delivery Date: {new Date(serviceOffer.start_date).toLocaleDateString()}</Card.Title>
+                        <Card.Title className="ms-2" as="span">Time: {new Date(serviceOffer.start_date).toLocaleTimeString()}</Card.Title><br />
+                        <Card.Text className="m-2" as="button">Estimate-Price: $ {serviceOffer.estimate_price}</Card.Text>
+                        <Card.Title>Comments from Service Provider</Card.Title>
+                        <Card.Text>{serviceOffer.comment}</Card.Text>
+
                         {!currentUser.is_mechanic&&
                         <>
                         <Card.Text>

@@ -54,33 +54,27 @@ export const MechanicDashBoard = ({currentUser}) => {
     
 
     return(
-        <main>
+        <main class="mechanic-dashboard">
             <h1>Mechanic Dashboard</h1>
-            <Container>
-                <Row>
-                    <Col>
-                        <Card className="p-3">
-                            <ServiceRequestIndexPage ServiceRequests={state.service_requests} currentUser={currentUser} setRerender={setRerender} />
+            <Container className="m-2">
+                <Col>
+                    <Row className="m-2">
+                    <Card className="p-3">
+                            <ServiceRequestIndexPage ServiceRequests={state.service_requests} currentUser={currentUser} setRerender={setRerender}  />
                         </Card>
-                    </Col>
-                    <Col>
-                        <Card className="p-3">
+                    </Row>
+                    <Row className="m-2">
+                    <Card className="p-3">
                             <ServiceOfferIndexPage ServiceOffers={state.service_offers} currentUser={currentUser} setRerender={setRerender} />
                         </Card>
-                    </Col>
-
-                </Row>
-
-            </Container>
-            <Container>
-                <Row>
-                    <Col>
+                    </Row>
+                    <Row className="m-2">
+                
                         <Card className="p-3">
-                            <AppointmentIndexPage appointments={state.appointments} setRerender={setRerender} />
+                            <AppointmentIndexPage appointments={state.appointments} setRerender={setRerender} currentUser={currentUser} />
                         </Card>
-                    </Col>
-
-                </Row>
+                    </Row>
+                </Col>
             </Container>
         </main>
     )

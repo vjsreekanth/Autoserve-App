@@ -26,6 +26,14 @@ class Ability
       can :crud, ServiceOffer do |service_offer|
         service_offfer.user == user
       end
+
+      can :crud, Appointment do |appointment|
+        appointment.customer == user 
+      end
+
+      can :update, Appointment do |appointment|
+        appointment.mechanic == user 
+      end
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions

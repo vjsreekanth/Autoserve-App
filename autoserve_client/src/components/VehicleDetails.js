@@ -24,9 +24,7 @@ const VehicleDetails = (props) => {
     <Card style={{ width: "auto"}} key={id}>
     <Card.Body>
         <Card.Title>{vehicle.title}</Card.Title>
-        <Card.Text>Vin:
-            {vehicle.vin}
-        </Card.Text><br />
+        <Card.Text className="mb-2" as="Button">Vin: {vehicle.vin}</Card.Text><br />
         <Button variant="primary" onClick={()=>{setShowModal(true); setVehicleId(vehicle.id);}}>Create Service Request</Button>
     </Card.Body>
 </Card>

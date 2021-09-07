@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-// import {Link} from 'react-router-dom';
-import Card from 'react-bootstrap/Card'
+
 import Button from 'react-bootstrap/Button'
 
 import { ListGroup } from 'react-bootstrap';
@@ -27,14 +26,14 @@ export const VehicleIndexPage = ({setRerender, vehicles, currentUser}) => {
   
     return(
         <main>
-            <h1>My Vehicles</h1>
+            <h1 style={{ backgroundColor: 'lightgoldenrodyellow'}}>My Vehicles</h1>
             
             <Button class="mb-2" variant="primary mb-2" onClick={()=>{setShowModal(true);}}>Add Vehicle</Button>
             <ListGroup>
                 {vehicles.map((vehicle, id) => (
 
-                <ListGroup.Item class="mb-3">
-                  <VehicleDetails key={id} vehicle={vehicle} setRerender={setRerender} />
+                <ListGroup.Item>
+                  <VehicleDetails  key={id} vehicle={vehicle} setRerender={setRerender} />
                     
             </ListGroup.Item>
                 ))}

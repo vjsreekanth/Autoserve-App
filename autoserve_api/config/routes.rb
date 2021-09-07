@@ -37,7 +37,7 @@ Rails.application.routes.draw do
       resources :service_offers, only: [:index] do
         resources :appointment, shallow: :true, only: [:create, :index]
       end
-      resources :appointment, only: [:index]
+      resources :appointment, only: [:index, :update]
 
 
     end

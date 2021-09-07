@@ -9,7 +9,7 @@ const AuthRoute=props=>{
           return <Component {...routeProps} currentUser={isAuthenticated}/>
         }
         else {
-          return <Redirect to="/SignIn"/>
+          return <Redirect to="/"/>
         }}
     }/>
     )

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import { BrowserRouter, Switch, Route} from "react-router-dom";
+import Navigation from "./components/Navbar";
 import WelcomePage from './components/Welcomepage';
 import SignUpPage from "./components/login/SignUpPage";
 import SignInPage from "./components/login/SignInPage";
@@ -10,6 +10,9 @@ import { VehicleIndexPage } from './components/VehicleIndexPage';
 import { ServiceRequestIndexPage } from './components/ServiceRequestIndexPage';
 import NewServiceRequestPage from './components/NewServiceRequestPage';
 import { ServiceOfferIndexPage } from './components/ServiceOfferIndexPage';
+import  {Footer} from './components/Footer';
+
+
 
 import './App.css';
 import AddVehiclePage from './components/AddVehiclePage';
@@ -22,6 +25,7 @@ import { UserProfilePage } from './components/UserProfilePage';
 
 const App = () => {
   const [state, setState] = useState({user: null})
+ 
 
   const getCurrentUser = () => {
     return User.current().then(user => {
@@ -34,12 +38,12 @@ const App = () => {
     })
   }
 
-  const destroySession = () => {
+  const destroySession = (props) => {
     Session.destroy().then((res) => {
       setState((state) => {
         return { user: null };
       });
-      
+     
     });
   }
 
@@ -52,7 +56,8 @@ const App = () => {
     console.log("this is state")
   return <div className="App"> 
   <BrowserRouter>
-    <Navbar currentUser={state.user} destroySession={destroySession}/>
+    <Navigation currentUser={state.user} destroySession={destroySession}/>
+    
     <Switch>
       {state.user&&<Route exact path="/customers" 
         render={(routeProps) => {
@@ -89,6 +94,7 @@ const App = () => {
       <Route exact path="/" component={WelcomePage}/>
 
     </Switch>
+       <Footer /> 
   </BrowserRouter>
   </div>
 }

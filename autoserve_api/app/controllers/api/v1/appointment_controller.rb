@@ -59,7 +59,7 @@ class Api::V1::AppointmentController < Api::ApplicationController
     private
 
     def find_appointment
-        @appointment ||= appointment.find params[:id]
+        @appointment ||= Appointment.find params[:id]
     end
 
     def appointment_params

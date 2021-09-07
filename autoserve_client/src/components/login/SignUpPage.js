@@ -37,7 +37,7 @@ const SignUpPage = (props) => {
     })
   }
   return(
-    <main style={{ backgroundImage: `url(${sign_up})`, height:'100vh'  }}>
+    <main className="page" style={{ backgroundImage: `url(${sign_up})`}}>
         <h1 className="pt-3 text-primary">Sign Up</h1>
        <div className="container">
         <div className="form-box">
