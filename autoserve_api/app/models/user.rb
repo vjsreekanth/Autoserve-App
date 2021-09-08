@@ -17,7 +17,7 @@ class User < ApplicationRecord
     validates :phone, :numericality => true, :length => { :minimum => 10, :maximum => 15 }
     # 
        
-        private
+       
 
         def full_name
             "#{first_name} #{last_name}".strip

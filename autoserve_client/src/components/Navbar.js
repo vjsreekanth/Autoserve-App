@@ -15,7 +15,7 @@ const Navbar = (props) => {
 
 
 
-  return  <nav className="bg-dark text-light justify-content-end nav sticky" style={{padding: "10px",display: "flex", height: "10vh", position: "top"  }}>
+  return  <nav className="bg-dark text-light justify-content-end" style={{padding: "10px",display: "flex", height: "10vh", position: "fixed", top: "0" , width: "100vw", zIndex: "50"}}>
     <div>
       <NavLink activeClassName={classes.active}  style={{ marginRight: "20px" }}  to="/">Home</NavLink>
       
@@ -29,8 +29,7 @@ const Navbar = (props) => {
       <> 
       <NavLink activeClassName={classes.active}  style={{ marginRight: "20px" }} to="/SignInPage">Sign in</NavLink>
       <NavLink activeClassName={classes.active}  style={{ marginRight: "20px" }} to="/SignUpPage">Sign up</NavLink>
-    
-    </> 
+      </> 
     }
 
     </div>

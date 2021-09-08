@@ -89,8 +89,13 @@
   text-decoration: none;
   /* position: flex-right; */
 }
-/* .sticky {
+.sticky {
 	position: -webkit-sticky;
-	position: sticky;
+	position: fixed;
 	top: 0;
-} */
+  
+}
+.App-container{
+  width: 100vw;
+  height: 80vh;
+}

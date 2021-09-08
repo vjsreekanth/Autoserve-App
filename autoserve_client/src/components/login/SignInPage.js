@@ -32,7 +32,7 @@ const SignInPage = (props) => {
     })
   }
 
-  return <main  className="page" style={{ backgroundImage: `url(${sign_in})`}}>
+  return <main style={{ backgroundImage: `url(${sign_in})`}}>
     <h1 className="pt-3 text-primary">Sign In</h1>
     <div className="container">
       <div className="form-box">

@@ -23,7 +23,7 @@ const AppointmentDetails = (props) => {
         return appointment?.status ? obj[appointment.status] : ''
       }
 
-    
+    console.log(appointment)
 
     return(
                 <>

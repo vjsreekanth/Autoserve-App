@@ -4,7 +4,7 @@ import React, {useState} from "react"
 const CreateAppointmentModal = ({show, handleClose, serviceOfferId, offerStartDate}) =>{
 
   console.log(offerStartDate)
-   const [params, setParams] = useState({})
+   const [params, setParams] = useState({start_time: offerStartDate})
    const handleFormChange = (event) =>{
        setParams({...params, [event.target.name]:event.target.value})
    }

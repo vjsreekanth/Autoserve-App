@@ -57,16 +57,16 @@ const App = () => {
   return <div className="App"> 
   <BrowserRouter>
     <Navigation currentUser={state.user} destroySession={destroySession}/>
+    <div style={{margin: "10vh 0"}}>
     
     <Switch>
-      {state.user&&<Route exact path="/customers" 
-        render={(routeProps) => {
-          return (<CustomerDashBoard {...routeProps} currentUser={state.user} />)
-        }}></Route>}
-    
+      
       <AuthRoute exact path="/mechanics" 
         isAuthenticated={state.user}
         component={MechanicDashBoard}/>
+        <AuthRoute exact path="/customers" 
+        isAuthenticated={state.user}
+        component={CustomerDashBoard}/>
       <AuthRoute exact path="/admin" 
         isAuthenticated={state.user}
         component={AdminDashBoard}/>
@@ -92,8 +92,8 @@ const App = () => {
       <Route exact path='/SignInPage' render={(routeProps)=><SignInPage {...routeProps} onSignIn={getCurrentUser}/>} />
       <Route exact path='/SignUpPage' render={(routeProps)=><SignUpPage {...routeProps} onSignUp={getCurrentUser}/>} />
       <Route exact path="/" component={WelcomePage}/>
-
     </Switch>
+    </div>
        <Footer /> 
   </BrowserRouter>
   </div>
