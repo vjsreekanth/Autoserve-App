@@ -11,6 +11,7 @@ import { ServiceRequestIndexPage } from './components/ServiceRequestIndexPage';
 import NewServiceRequestPage from './components/NewServiceRequestPage';
 import { ServiceOfferIndexPage } from './components/ServiceOfferIndexPage';
 import  {Footer} from './components/Footer';
+import NewNav from './components/NewNav';
 
 
 
@@ -56,11 +57,11 @@ const App = () => {
     console.log("this is state")
   return <div className="App"> 
   <BrowserRouter>
-    <Navigation currentUser={state.user} destroySession={destroySession}/>
+    <NewNav currentUser={state.user} destroySession={destroySession}/>
     <div style={{margin: "10vh 0"}}>
     
     <Switch>
-      
+
       <AuthRoute exact path="/mechanics" 
         isAuthenticated={state.user}
         component={MechanicDashBoard}/>
