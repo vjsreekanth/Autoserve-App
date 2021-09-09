@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { ServiceRequest, ServiceOffer, Appointment } from '../../requests';
+import { ServiceRequest, ServiceOffer, Vehicle, Appointment } from '../../requests';
 import Card from 'react-bootstrap/Card'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import { ServiceRequestIndexPage } from '../ServiceRequestIndexPage';
 import { ServiceOfferIndexPage } from '../ServiceOfferIndexPage';
 import { AppointmentIndexPage } from '../AppointmentIndexPage';
@@ -9,7 +9,7 @@ import { AppointmentIndexPage } from '../AppointmentIndexPage';
 
 export const MechanicDashBoard = ({currentUser}) => {
 
-    const[state, setState] = useState({service_requests: [], service_offers: [], appointments: []})
+    const[state, setState] = useState({service_requests: [], service_offers: [], appointments: [], vehicles: []})
     const [trigger, setTrigger] = useState(true)
 
     const setRerender = () => {
@@ -55,27 +55,42 @@ export const MechanicDashBoard = ({currentUser}) => {
 
     return(
         <main class="mechanic-dashboard">
-            <h1>Mechanic Dashboard</h1>
-            <Container className="m-2">
-                <Col>
-                    <Row className="m-2">
-                    <Card className="p-3">
-                            <ServiceRequestIndexPage ServiceRequests={state.service_requests} currentUser={currentUser} setRerender={setRerender}  />
-                        </Card>
-                    </Row>
-                    <Row className="m-2">
-                    <Card className="p-3">
-                            <ServiceOfferIndexPage ServiceOffers={state.service_offers} currentUser={currentUser} setRerender={setRerender} />
-                        </Card>
-                    </Row>
-                    <Row className="m-2">
+            <h1 className="p-2">Mechanic Dashboard</h1>
+            <Container className="mb-3"  fluid="md">
                 
-                        <Card className="p-3">
-                            <AppointmentIndexPage appointments={state.appointments} setRerender={setRerender} currentUser={currentUser} />
-                        </Card>
+                    <Row className="m-2">
+                        <Col sm={12}>
+                            <Card className="p-3">
+                                <ServiceRequestIndexPage ServiceRequests={state.service_requests} currentUser={currentUser} setRerender={setRerender}  />
+                            </Card>
+                        </Col>
                     </Row>
-                </Col>
+                    <Row className="m-2">
+                        <Col sm={12}>
+                            <Card className="p-3">
+                                <ServiceOfferIndexPage ServiceOffers={state.service_offers} currentUser={currentUser} setRerender={setRerender} />
+                            </Card>
+                        </Col>
+                    </Row>
+                    <Row className="m-2">
+                        <Col sm={12}>   
+                            <Card className="p-3">
+                                <AppointmentIndexPage appointments={state.appointments} setRerender={setRerender} currentUser={currentUser} />
+                            </Card>
+                        </Col>
+                    </Row>
             </Container>
+            <div  style={{zIndex: "10", position: "fixed", bottom: "140px", right: "0px", left: "0px", backgroundColor: "lightblue"}}> 
+                <Row>
+                    <Col>
+                        <Button variant="primary" className="m-1" href="#serviceRequests">Service Requests</Button>
+                        <Button variant="secondary" className="m-1" href="#vehicles">Vehicles</Button>
+                        <Button variant="secondary" className="m-1" href="#serviceOffers">Service Offers</Button>
+                        <Button variant="secondary" href="#appointments">Appointments</Button>
+                    </Col>
+                           
+                </Row>
+            </div>
         </main>
     )
 }

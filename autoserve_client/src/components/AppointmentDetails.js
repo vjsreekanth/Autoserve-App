@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Button} from 'react-bootstrap'
+import {Card, Button, Badge} from 'react-bootstrap'
 import { Appointment } from '../requests';
 
 const AppointmentDetails = (props) => {
@@ -27,26 +27,53 @@ const AppointmentDetails = (props) => {
 
     return(
                 <>
-                    <Card>
-                        {/* <Card.Header as="h5">Customer:{appointment.customer}</Card.Header> */}
-                        <Card.Body>
-                          <Card.Title as="span">Appointment Date: {new Date(appointment.start_time).toLocaleDateString()}</Card.Title>
-                          <Card.Title className="ms-2" as="span">Time: {new Date(appointment.start_time).toLocaleTimeString()}</Card.Title>
-                           <Card.Title></Card.Title>
+                    <Card className="shadow">
+                    {/* {currentUser.is_mechanic&&
+                        <Card.Header as="h5"> Service Appointment with {appointment.customer}</Card.Header> }
+                        {!currentUser.is_mechanic&&
+                        <Card.Header as="h5"> Service Appointment for{appointment.service_vehicle.title}</Card.Header> } */}
+                        
+
+                        <Card.Body style={{ textAlign: "start"}}>
+                        
+         
+                            {currentUser.is_mechanic?
+                            <>
+                            <Card.Title>Customer Details</Card.Title>
+                            <Card.Text>Name: {appointment.customer.full_name}</Card.Text>
+                            <Card.Text>Email: {appointment.customer.email}</Card.Text>
+                            <Card.Text>Phone: {appointment.customer.phone}</Card.Text>
+                            <Card.Text>Vehicle: {appointment.service_vehicle.title}</Card.Text>
+                            <Card.Text>Service request: {appointment.service_request.title}</Card.Text>
+                            <Card.Text>Appointment Date: {new Date(appointment.start_time).toUTCString()}</Card.Text>
+                              
                             <Card.Text>
                                 <Button className="mt-2" as="div" variant={handleStatus(appointment)}size="md">
                                    Status: {appointment.status.toUpperCase()}
                                 </Button>
                             </Card.Text>
-                            {currentUser.is_mechanic?
-                            <>
                          
-                            <Button disabled={appointment.status === "approved" || appointment.status === "denied" || appointment.status === "cancelled"} variant="success" className="btn-sm mx-2" onClick={() => changeStatus(appointment.id, 'approved')}>{ appointment.status==="approved"? "Appointment Approved":"Approve Appointment"}</Button> 
+                            <Button disabled={appointment.status === "approved" || appointment.status === "denied" || appointment.status === "cancelled"} variant="success" className="btn-sm me-2" onClick={() => changeStatus(appointment.id, 'approved')}>{ appointment.status==="approved"? "Appointment Approved":"Approve Appointment"}</Button> 
                             <Button disabled={appointment.status === "approved" || appointment.status === "denied" || appointment.status === "cancelled"} variant="danger" className="btn-sm" onClick={() => changeStatus(appointment.id, 'denied')}>Deny</Button>
                             </> 
                             : 
                                 <>
-                              <Button disabled={appointment.status === "denied" || appointment.status === "cancelled" } variant="danger" className="btn-sm mx-2" onClick={() => changeStatus(appointment.id, 'cancelled')}>Cancel</Button> 
+                                <Card.Title>Appointment Details</Card.Title>
+                                <Card.Text>Vehicle: {appointment.service_vehicle.title}</Card.Text>
+                                <Card.Text>Service request: {appointment.service_request.title}</Card.Text>
+                                <Card.Text>Appointment Date: {new Date(appointment.start_time).toUTCString()}</Card.Text>
+                                <Card.Text>Delivery Date: {new Date(appointment.service_offer.delivery_date).toUTCString()}</Card.Text>
+                                <Card.Title>Service Provider Details</Card.Title>
+                                 <Card.Text>{appointment.mechanic.full_name}</Card.Text>
+                                 <Card.Text>{appointment.mechanic.email}</Card.Text>
+                                 <Card.Text>{appointment.mechanic.phone}</Card.Text>
+                                 <Card.Text>
+                                <Button className="mt-2" as="div" variant={handleStatus(appointment)}size="md">
+                                   Status: {appointment.status.toUpperCase()}
+                                </Button>
+                            </Card.Text>
+                              <Button disabled={appointment.status === "denied" || appointment.status === "cancelled" } variant="danger" className="btn-sm me-2" onClick={() => changeStatus(appointment.id, 'cancelled')}>Cancel</Button> 
+                            
                               </>
                             }
                             

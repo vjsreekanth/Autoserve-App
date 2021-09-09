@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Card, Button, DropdownButton, Dropdown } from 'react-bootstrap';
+import { Card, Button, Badge} from 'react-bootstrap';
 import CreateAppointmentModal from './CreateAppointmentModal';
 
 const ServiceOfferDetails = (props) => {
@@ -20,17 +20,41 @@ const ServiceOfferDetails = (props) => {
 
     return(
         <main>
-            <Card>
-                <Card.Header>Service Offer for {serviceOffer.customer.full_name.toUpperCase()}</Card.Header>
+            <Card className="shadow">
+            {currentUser.is_mechanic?
+                       <Card.Header style={{ backgroundColor: 'lightgrey'}}>Service Offer for {serviceOffer.customer.full_name.toUpperCase()}</Card.Header> :
+                       <Card.Header style={{ backgroundColor: 'lightgrey'}}>Service Offer for {serviceOffer.service_vehicle}</Card.Header>}
+                
+
+                
                 
                     <Card.Body style={{ textAlign: "start"}}>
+
+                    {currentUser.is_mechanic? 
+
+                         <>
+
                         <Card.Title >Customer Details</Card.Title>
                         <Card.Text>{serviceOffer.customer.full_name} </Card.Text>
                         <Card.Text>{serviceOffer.service_vehicle}</Card.Text>
-                        <Card.Title >Service Provider: {serviceOffer.mechanic.full_name} </Card.Title>
+                        <Card.Text>Start Date: {new Date(serviceOffer.start_date).toUTCString()}</Card.Text>
+                        <Card.Text>Delivery Date: {new Date(serviceOffer.start_date).toUTCString()}</Card.Text>
+                        <h3><Badge className="mt-2" bg="secondary">Estimate-Price: $ {serviceOffer.estimate_price}</Badge></h3>
+                        <h4>Service Provider Comments:</h4>
+                        <Card className="frame mb-2" style={{ Width: 'auto', height: "3rem"}}>
+                    
+                            <Card.Text className="p-2">{serviceOffer.comment}</Card.Text>
+
+                        </Card>
+
+                        </>
+                    : 
+
+                    <>
+                    <Card.Title >Service Provider Details </Card.Title>
 
                         
-                        
+                    <Card.Text>Name: {serviceOffer.mechanic.full_name}</Card.Text>
                             <Card.Text>Email: {serviceOffer.mechanic.email}</Card.Text>
                             
                             <Card.Text>Phone: {serviceOffer.mechanic.phone}</Card.Text>
@@ -38,23 +62,27 @@ const ServiceOfferDetails = (props) => {
                            
                         
 
+                        <Card.Title >Service Offer Details </Card.Title>
+                        <Card.Text>Start Date: {new Date(serviceOffer.start_date).toUTCString()}</Card.Text>
+                        <Card.Text>Delivery Date: {new Date(serviceOffer.start_date).toUTCString()}</Card.Text>
+                        <h3><Badge className="mt-2" bg="secondary">Estimate-Price: $ {serviceOffer.estimate_price}</Badge></h3>
+                        <h4>Service Provider Comments:</h4>
+                        <Card className="frame mb-2" style={{ Width: 'auto', height: "3rem"}}>
+                    
+                            <Card.Text className="p-2">{serviceOffer.comment}</Card.Text>
 
-                        <Card.Title as="span">Start Date: {new Date(serviceOffer.start_date).toLocaleDateString()}</Card.Title>
-                        <Card.Title className="ms-2" as="span">Time: {new Date(serviceOffer.start_date).toLocaleTimeString()}</Card.Title><br />
-                        <Card.Title as="span">Delivery Date: {new Date(serviceOffer.start_date).toLocaleDateString()}</Card.Title>
-                        <Card.Title className="ms-2" as="span">Time: {new Date(serviceOffer.start_date).toLocaleTimeString()}</Card.Title><br />
-                        <Card.Text className="m-2" as="button">Estimate-Price: $ {serviceOffer.estimate_price}</Card.Text>
-                        <Card.Title>Comments from Service Provider</Card.Title>
-                        <Card.Text>{serviceOffer.comment}</Card.Text>
+                        </Card>
 
-                        {!currentUser.is_mechanic&&
-                        <>
-                        <Card.Text>
-                            
-                        </Card.Text>
                         <Button disabled={serviceOffer.start_time} variant="primary" onClick={()=>{setShowModal(true); setServiceOfferId(serviceOffer.id); setOfferStartDate(serviceOffer.start_date)}}>{ serviceOffer.start_time?"Appointment Created":"Create Appointment"}</Button>
+
                         </>
-                        }
+                        
+                    
+                    }
+                        
+                        
+                        
+
                     </Card.Body>
             </Card>
             <CreateAppointmentModal show={showModal} handleClose={handleClose} serviceOfferId={serviceOfferId} offerStartDate={offerStartDate} />

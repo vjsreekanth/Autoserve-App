@@ -56,7 +56,7 @@ const NewNav = (props) => {
             <LinkContainer  to="/profile">
             <Nav.Link>Profile</Nav.Link>
           </LinkContainer>
-          <span  className="mt-2" style={{ marginRight: "20px" }} >Welcome, {currentUser.full_name}</span>
+          <span  className="mt-2" style={{ marginRight: "20px", color: "red" }} >Welcome, {currentUser.full_name}</span>
           <Button className="btn-sm" onClick={destroySession}>Sign Out</Button>
           </>
             : ''} 
@@ -72,7 +72,7 @@ const NewNav = (props) => {
           <LinkContainer  to="/profile">
               <Nav.Link>Profile</Nav.Link>
             </LinkContainer>
-            <span className="mt-2" style={{ marginRight: "20px" }} >Welcome, {currentUser.full_name}</span>
+            <span className="mt-2" style={{ marginRight: "20px", color: "red" }} >Welcome, {currentUser.full_name}</span>
             <Button className="btn-sm" onClick={destroySession}>Sign Out</Button>
             </>
             : ''} 

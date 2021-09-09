@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import {Card, Badge} from 'react-bootstrap';
 import CreateServiceRequestModal from './CreateServiceRequestModal';
 
 
@@ -21,10 +21,13 @@ const VehicleDetails = (props) => {
 
   return (
    <main>
-    <Card style={{ width: "auto"}} key={id}>
-    <Card.Body>
+    <Card className="shadow" style={{ width: "auto"}} key={id}>
+    <Card.Body style={{ textAlign: "start"}}>
         <Card.Title>{vehicle.title}</Card.Title>
-        <Card.Text className="mb-2" as="Button">Vin: {vehicle.vin}</Card.Text><br />
+        <Card.Text>Make: {vehicle.make} </Card.Text>
+        <Card.Text>Model: {vehicle.model} </Card.Text>
+        <Card.Text>Model Year: {vehicle.year} </Card.Text>
+        <Card.Text>Vin: {vehicle.vin}</Card.Text>
         <Button variant="primary" onClick={()=>{setShowModal(true); setVehicleId(vehicle.id);}}>Create Service Request</Button>
     </Card.Body>
 </Card>

@@ -71,8 +71,10 @@ export const CustomerDashBoard = ({ currentUser}) => {
     return(
         
         <main class="customer-dashboard">
-            <h2 className="p-2">{currentUser.full_name}'s Dashboard</h2>
-            <Container  fluid="md">
+            
+            
+            <Container className="mb-3"  fluid="md">
+            <h2>{currentUser.full_name}'s Dashboard</h2>
 
                 <Row className="m-2">
                     <Col sm={12}>
@@ -103,17 +105,19 @@ export const CustomerDashBoard = ({ currentUser}) => {
                         </Card>
                     </Col>
                 </Row>
-               
-                    <div className="justify-content-end" style={{zIndex: "10", position: "fixed", bottom: "140px", right: "10px", backgroundColor: "lightblue"}}>
-                        <Button variant="outline-secondary" className="m-1" href="#vehicles">Vehicles</Button>
-                        <Button variant="outline-secondary" className="m-1" href="#serviceRequests">Service Requests</Button>
-                        <Button variant="outline-secondary" className="m-1" href="#serviceOffers">Service Offers</Button>
-                        <Button variant="outline-secondary" href="#appointments">Appointments</Button>
-                    </div>
-               
-             
-                
             </Container>
+
+            <div style={{zIndex: "10", position: "fixed", bottom: "140px", right: "0px", left: "0px", backgroundColor: "lightblue"}}> 
+                <Row>
+                    <Col>
+                        <Button variant="primary" className="m-1" href="#serviceRequests">Service Requests</Button>
+                        <Button variant="secondary" className="m-1" href="#vehicles">Vehicles</Button>
+                        <Button variant="secondary" className="m-1" href="#serviceOffers">Service Offers</Button>
+                        <Button variant="secondary" href="#appointments">Appointments</Button>
+                    </Col>
+                           
+                </Row>
+            </div>
                     
         </main>
         
