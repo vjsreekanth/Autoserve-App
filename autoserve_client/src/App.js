@@ -58,7 +58,7 @@ const App = () => {
   return <div className="App"> 
   <BrowserRouter>
     <NewNav currentUser={state.user} destroySession={destroySession}/>
-    <div style={{margin: "10vh 0"}}>
+    <div style={{margin: "5.8vh 0", marginBottom: "12vh"}}>
     
     <Switch>
 
@@ -92,7 +92,7 @@ const App = () => {
      
       <Route exact path='/SignInPage' render={(routeProps)=><SignInPage {...routeProps} onSignIn={getCurrentUser}/>} />
       <Route exact path='/SignUpPage' render={(routeProps)=><SignUpPage {...routeProps} onSignUp={getCurrentUser}/>} />
-      <Route exact path="/" component={WelcomePage}/>
+      <Route exact path="/home" component={WelcomePage}/>
     </Switch>
     </div>
        <Footer /> 

@@ -25,14 +25,14 @@ export const VehicleIndexPage = ({setRerender, vehicles, currentUser}) => {
   
   
     return(
-        <main>
-            <h1 style={{ backgroundColor: 'lightgoldenrodyellow'}}>My Vehicles</h1>
+        <main id="vehicles">
+            <h1  style={{ backgroundColor: 'lightblue'}}>MY VEHICLES</h1>
             
-            <Button class="mb-2" variant="primary mb-2" onClick={()=>{setShowModal(true);}}>Add Vehicle</Button>
+            <Button class="mb-2" variant="warning mb-2" onClick={()=>{setShowModal(true);}}>Add Vehicle</Button>
             <ListGroup>
                 {vehicles.map((vehicle, id) => (
 
-                <ListGroup.Item>
+                <ListGroup.Item style={{margin: "1vh 0", border:"0"}}>
                   <VehicleDetails  key={id} vehicle={vehicle} setRerender={setRerender} />
                     
             </ListGroup.Item>

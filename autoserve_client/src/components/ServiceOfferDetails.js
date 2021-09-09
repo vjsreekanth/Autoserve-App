@@ -19,21 +19,24 @@ const ServiceOfferDetails = (props) => {
     console.log(offerStartDate)
 
     return(
-        <main >
+        <main>
             <Card>
-                <Card.Header>Service Request: {serviceOffer.service_title}</Card.Header>
+                <Card.Header>Service Offer for {serviceOffer.customer.full_name.toUpperCase()}</Card.Header>
                 
-                    <Card.Body>
-                        <Card.Title>Vehicle: {serviceOffer.service_vehicle}</Card.Title>
-                        <Card.Title >Customer Name: {serviceOffer.customer.full_name} </Card.Title>
+                    <Card.Body style={{ textAlign: "start"}}>
+                        <Card.Title >Customer Details</Card.Title>
+                        <Card.Text>{serviceOffer.customer.full_name} </Card.Text>
+                        <Card.Text>{serviceOffer.service_vehicle}</Card.Text>
                         <Card.Title >Service Provider: {serviceOffer.mechanic.full_name} </Card.Title>
-                        <DropdownButton className="m-2" variant="secondary"drop={"up"} id="dropdown-item-button" title="Service Provider Contact details">
-                            <Dropdown.ItemText eventKey="1">Email: {serviceOffer.mechanic.email}</Dropdown.ItemText>
-                            <Dropdown.Divider />
-                            <Dropdown.ItemText eventKey="2">Phone: {serviceOffer.mechanic.phone}</Dropdown.ItemText>
+
+                        
+                        
+                            <Card.Text>Email: {serviceOffer.mechanic.email}</Card.Text>
+                            
+                            <Card.Text>Phone: {serviceOffer.mechanic.phone}</Card.Text>
                             
                            
-                        </DropdownButton>
+                        
 
 
                         <Card.Title as="span">Start Date: {new Date(serviceOffer.start_date).toLocaleDateString()}</Card.Title>

@@ -13,11 +13,11 @@ export const ServiceRequestIndexPage = ({setRerender, currentUser, ServiceReques
   
  
     return(
-        <main>
-            <h1 style={{ backgroundColor: 'lightgoldenrodyellow'}}>Service Requests</h1>
+        <main id="serviceRequests">
+            <h2 style={{ backgroundColor: 'lightblue'}}>MY SERVICE REQUESTS</h2>
             <ListGroup>
                 {ServiceRequests&&ServiceRequests.map((serviceRequest, id)=> (
-                <ListGroup.Item>
+                <ListGroup.Item style={{margin: "1vh 0", border:"0"}}>
                     <ServiceRequestDetails key={id} serviceRequest={serviceRequest} setRerender={setRerender} currentUser={currentUser}/>
                 </ListGroup.Item>
                

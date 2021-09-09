@@ -21,19 +21,23 @@ const ServiceRequestDetails = (props) => {
         <>
        
             <Card>
-                <Card.Header>{serviceRequest.title.toUpperCase()}</Card.Header>
-                <Card.Body>
-                    <Card.Title >Vehicle Name: {serviceRequest.vehicle_name} </Card.Title>
-                    <Card.Text className="mb-2" as="Button">Vin: {serviceRequest.vehicle.vin}</Card.Text><br />
-                    <Card.Title >Customer Name: {serviceRequest.customer_name} </Card.Title>
+                <Card.Header style={{ backgroundColor: 'lightgrey'}}>{serviceRequest.title.toUpperCase()}</Card.Header>
+                <Card.Body style={{ textAlign: "start"}}>
+                   
+                    <Card.Title >{serviceRequest.customer_name} </Card.Title>
+                    <Card.Text >{serviceRequest.vehicle_name} </Card.Text>
+                    <Card.Text className="mb-2">Vin: {serviceRequest.vehicle.vin}</Card.Text>
+                    <Card.Title as="span">Appointment Needed on: {new Date(serviceRequest.appointment_date).toLocaleDateString()}</Card.Title>
+                    <Card.Title className="ms-2 mb-2" as="span">Time: {new Date(serviceRequest.appointment_date).toLocaleTimeString()}</Card.Title><br /><br />
+                    <h4>Customer Comments</h4>
+                    <Card className="frame mb-2" style={{ Width: 'auto', height: "3rem"}}>
+                    
+                    <Card.Text  className="p-2">{serviceRequest.description}</Card.Text>
 
-                    <Card.Title>Customer Comments</Card.Title>
-                    <Card.Text  className="mb-2">{serviceRequest.description}</Card.Text>
-                    <Card.Title as="span">Appointment needed on: {new Date(serviceRequest.appointment_date).toLocaleDateString()}</Card.Title>
-                    <Card.Title className="ms-2" as="span">Time: {new Date(serviceRequest.appointment_date).toLocaleTimeString()}</Card.Title><br />
+                    </Card>
                         {currentUser.is_mechanic&&
 
-                    <Button className="ms-2" variant="primary" onClick={()=>{setShowModal(true); setServiceRequestId(serviceRequest.id)}}>Create Service Offer</Button>
+                    <Button  variant="primary" onClick={()=>{setShowModal(true); setServiceRequestId(serviceRequest.id)}}>Create Service Offer</Button>
                             }
                 </Card.Body>
             </Card>

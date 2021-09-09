@@ -9,11 +9,11 @@ import AppointmentDetails from './AppointmentDetails';
 export const AppointmentIndexPage = ({appointments, setRerender, currentUser}) => {
     
     return(
-        <main>
-            <h1 style={{ backgroundColor: 'lightgoldenrodyellow'}}>Appointments</h1>
+        <main id="appointments">
+            <h1 style={{ backgroundColor: 'lightblue'}}> MY APPOINTMENTS</h1>
             <ListGroup>
                 {appointments&&appointments.map((appointment, id)=> (
-                <ListGroup.Item>
+                <ListGroup.Item style={{margin: "1vh 0", border:"0"}}>
                     <AppointmentDetails key={id} appointment={appointment} setRerender={setRerender} currentUser={currentUser} />
 
                 </ListGroup.Item>

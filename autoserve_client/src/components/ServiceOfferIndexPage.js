@@ -14,11 +14,11 @@ export const ServiceOfferIndexPage = ({setRerender, ServiceOffers, currentUser})
    
     
     return(
-        <main>
-            <h1 style={{ backgroundColor: 'lightgoldenrodyellow'}}>Service Offers</h1>
+        <main id="serviceOffers">
+            <h2  style={{ backgroundColor: 'lightblue'}}>SERVICE OFFERS</h2>
             <ListGroup>
                 {ServiceOffers&&ServiceOffers.map((serviceOffer, id)=> (
-                <ListGroup.Item>
+                <ListGroup.Item style={{margin: "1vh 0", border:"0"}}>
                     <ServiceOfferDetails key={id} serviceOffer={serviceOffer} setRerender={setRerender} currentUser={currentUser} />
                 </ListGroup.Item>
                

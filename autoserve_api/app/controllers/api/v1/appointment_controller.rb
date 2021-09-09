@@ -68,7 +68,3 @@ class Api::V1::AppointmentController < Api::ApplicationController
 
 end
 
-# get("all_appointments", to: "appointments#all_appointments")
-# def all_appointments
-# appointments=Appointment.all
-# end
