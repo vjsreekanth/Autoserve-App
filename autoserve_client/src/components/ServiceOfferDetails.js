@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Card, Button, Badge} from 'react-bootstrap';
 import CreateAppointmentModal from './CreateAppointmentModal';
+import moment from 'moment';
 
 const ServiceOfferDetails = (props) => {
 
@@ -37,8 +38,8 @@ const ServiceOfferDetails = (props) => {
                         <Card.Title >Customer Details</Card.Title>
                         <Card.Text>{serviceOffer.customer.full_name} </Card.Text>
                         <Card.Text>{serviceOffer.service_vehicle}</Card.Text>
-                        <Card.Text>Start Date: {new Date(serviceOffer.start_date).toUTCString()}</Card.Text>
-                        <Card.Text>Delivery Date: {new Date(serviceOffer.start_date).toUTCString()}</Card.Text>
+                        <Card.Text>Start Date: {moment(serviceOffer.start_date).format('LLLL')}</Card.Text>
+                        <Card.Text>Delivery Date: {moment(serviceOffer.start_date).format('LLLL')}</Card.Text>
                         <h3><Badge className="mt-2" bg="secondary">Estimate-Price: $ {serviceOffer.estimate_price}</Badge></h3>
                         <h4>Service Provider Comments:</h4>
                         <Card className="frame mb-2" style={{ Width: 'auto', height: "3rem"}}>
@@ -63,8 +64,8 @@ const ServiceOfferDetails = (props) => {
                         
 
                         <Card.Title >Service Offer Details </Card.Title>
-                        <Card.Text>Start Date: {new Date(serviceOffer.start_date).toUTCString()}</Card.Text>
-                        <Card.Text>Delivery Date: {new Date(serviceOffer.start_date).toUTCString()}</Card.Text>
+                        <Card.Text>Start Date: {moment(serviceOffer.start_date).format('LLLL')}</Card.Text>
+                        <Card.Text>Delivery Date: {moment(serviceOffer.start_date).format('LLLL')}</Card.Text>
                         <h3><Badge className="mt-2" bg="secondary">Estimate-Price: $ {serviceOffer.estimate_price}</Badge></h3>
                         <h4>Service Provider Comments:</h4>
                         <Card className="frame mb-2" style={{ Width: 'auto', height: "3rem"}}>
@@ -73,7 +74,7 @@ const ServiceOfferDetails = (props) => {
 
                         </Card>
 
-                        <Button disabled={serviceOffer.start_time} variant="primary" onClick={()=>{setShowModal(true); setServiceOfferId(serviceOffer.id); setOfferStartDate(serviceOffer.start_date)}}>{ serviceOffer.start_time?"Appointment Created":"Create Appointment"}</Button>
+                        <Button disabled={serviceOffer.start_time} variant="primary" onClick={()=>{ setOfferStartDate(serviceOffer.start_date); setServiceOfferId(serviceOffer.id); setShowModal(true); }}>{ serviceOffer.start_time?"Appointment Created":"Create Appointment"}</Button>
 
                         </>
                         

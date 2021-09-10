@@ -1,10 +1,12 @@
 import { Modal, Button } from "react-bootstrap"
 import {Appointment} from '../requests'
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
+import moment from 'moment';
 const CreateAppointmentModal = ({show, handleClose, serviceOfferId, offerStartDate}) =>{
 
   
-   const [params, setParams] = useState({start_time: offerStartDate})
+   const [params, setParams] = useState({})
+
    const handleFormChange = (event) =>{
        setParams({...params, [event.target.name]:event.target.value})
    }
@@ -18,6 +20,15 @@ const CreateAppointmentModal = ({show, handleClose, serviceOfferId, offerStartDa
         
         })
     }
+
+    useEffect(() => {
+      if (show === true){
+        console.log(offerStartDate)
+        let formattedDate = moment(offerStartDate).format('YYYY-MM-DDTHH:MM:SS')
+        setParams({...params, start_time: formattedDate})
+      }
+
+    }, [show])
 
 
     return(

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card, Button, Badge} from 'react-bootstrap'
 import { Appointment } from '../requests';
+import moment from 'moment';
 
 const AppointmentDetails = (props) => {
 
@@ -45,7 +46,7 @@ const AppointmentDetails = (props) => {
                             <Card.Text>Phone: {appointment.customer.phone}</Card.Text>
                             <Card.Text>Vehicle: {appointment.service_vehicle.title}</Card.Text>
                             <Card.Text>Service request: {appointment.service_request.title}</Card.Text>
-                            <Card.Text>Appointment Date: {new Date(appointment.start_time).toUTCString()}</Card.Text>
+                            <Card.Text>Appointment Date: {moment(appointment.start_time).format('LLLL')}</Card.Text>
                               
                             <Card.Text>
                                 <Button className="mt-2" as="div" variant={handleStatus(appointment)}size="md">
@@ -61,8 +62,8 @@ const AppointmentDetails = (props) => {
                                 <Card.Title>Appointment Details</Card.Title>
                                 <Card.Text>Vehicle: {appointment.service_vehicle.title}</Card.Text>
                                 <Card.Text>Service request: {appointment.service_request.title}</Card.Text>
-                                <Card.Text>Appointment Date: {new Date(appointment.start_time).toUTCString()}</Card.Text>
-                                <Card.Text>Delivery Date: {new Date(appointment.service_offer.delivery_date).toUTCString()}</Card.Text>
+                                <Card.Text>Appointment Date: {moment(appointment.start_time).format('LLLL')}</Card.Text>
+                                <Card.Text>Delivery Date: {moment(appointment.service_offer.delivery_date).format('LLLL')}</Card.Text>
                                 <Card.Title>Service Provider Details</Card.Title>
                                  <Card.Text>{appointment.mechanic.full_name}</Card.Text>
                                  <Card.Text>{appointment.mechanic.email}</Card.Text>

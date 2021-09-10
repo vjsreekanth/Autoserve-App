@@ -55,7 +55,7 @@ export const MechanicDashBoard = ({currentUser}) => {
 
     return(
         <main class="mechanic-dashboard">
-            <h1 className="p-2">Mechanic Dashboard</h1>
+            <h2>{currentUser.full_name}'s Dashboard</h2>
             <Container className="mb-3"  fluid="md">
                 
                     <Row className="m-2">
